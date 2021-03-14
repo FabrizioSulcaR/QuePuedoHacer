@@ -5,6 +5,7 @@
   color: #333;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  overflow-x:hidden;
 }
 
 html {
@@ -13,7 +14,9 @@ html {
 
 .content1{
   position: relative;
-  margin: 30px auto;
+  margin-top:20px;
+  margin-left: 0;
+  margin-right: 0;
   text-align: center;
   padding: 0 20px;
 }
@@ -24,12 +27,15 @@ html {
 }
 
 footer{
-  position: fixed;
+  position: static;
   bottom: 0px;
   width: 100vw;
   background: #111;
   color: #d9d9d9;
+  
 }
+
+
 .main-content{
   display: flex;
 }
@@ -49,7 +55,7 @@ footer{
 }
 .box .content{
   margin: 20px 0 0 0;
-  position: relative;
+  position: static;
 }
 .box .content:before{
   position: absolute;
@@ -72,6 +78,7 @@ footer{
   font-size: 1.0625rem;
   margin-bottom: 2px;
   color: #656565;
+
 }
 .right form .msg{
   margin-top: 10px;
@@ -82,11 +89,13 @@ footer{
   background: #151515;
   padding-left: 10px;
   border: 1px solid #222222;
-  color: #d3d3d3
+  color: #d3d3d3;
+  
+  
 }
 .right form input:focus,
 .right form textarea:focus{
-  outline-color: #3498db;
+  outline-color: #ce1f1f;
 }
 .right form input{
   height: 35px;
@@ -121,7 +130,7 @@ footer{
     font-size:1.25rem;
 }
 
-.buscar button {
+/*.buscar button {
     height: 25px;
     width: 20%;
     border: none;
@@ -133,20 +142,153 @@ footer{
     transition: .3s;
     color: #d9d9d9;
     margin:20px;
-}
+} */
+
 a {
     text-decoration: none;
     color:#d9d9d9
 }
 
 
+/* CSS Original until here */
 
-footer{
-  position: relative;
-  bottom: 0px;
+.btn-abrir-popup {
+  height: 35px;
+  width: 23%;
+  border: none;
+  outline: none;
+  background: #f12020;
+  font-size: 1.8rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: .3s;
+  color: #d9d9d9;
+  margin:0px;
+  padding:px;
 }
 
-@media screen and (max-width: 900px) {
+
+
+.overlay {
+	background: rgba(0,0,0,.3);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	visibility: hidden;
+}
+
+.overlay.active {
+	visibility: visible;
+}
+
+.popup {
+	background: #F8F8F8;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	padding: 8px;
+	text-align: center;
+	width: 60vw;
+  height:90vh;
+	transition: .3s ease all;
+	transform: scale(0.7);
+	opacity: 0;
+  margin:50px;
+}
+
+.popup .btn-cerrar-popup {
+	font-size: 20px;
+	line-height: 20px;
+	display: block;
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+
+.popup .btn-cerrar-popup:hover {
+	color: #000;
+}
+
+.popup h3 {
+	font-size: 3rem;
+	font-weight: 600;
+	margin-bottom: 10px;
+	opacity: 0;
+}
+
+.popup p {
+	font-size: 1.8rem;
+	font-weight: 300;
+	margin-bottom: 20px;
+	opacity: 0;
+  margin:10px;
+  text-align: start;
+}
+
+ul {
+  text-decoration: none;
+  list-style-type: none;
+  font-size:1.4rem;
+}
+
+/* ------------------------- */
+/* ANIMACIONES */
+/* ------------------------- */
+.popup.active {	transform: scale(1); opacity: 1; }
+.popup.active h3 { animation: entradaTitulo .8s ease .5s forwards; }
+.popup.active p { animation: entradaSubtitulo .8s ease .5s forwards; }
+.popup.active .contenedor-inputs { animation: entradaInputs 1s linear 1s forwards; }
+
+@keyframes entradaTitulo {
+	from {
+		opacity: 0;
+		transform: translateY(-25px);
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes entradaSubtitulo {
+	from {
+		opacity: 0;
+		transform: translateY(25px);
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes entradaInputs {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 374px) {
 
   .main-content{
     flex-wrap: wrap;
@@ -155,6 +297,41 @@ footer{
   .main-content .box{
     margin: 5px 0;
   }
+  .popup {
+    background: #F8F8F8;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px;
+    text-align: center;
+    width: 90vw;
+    height:90vh;
+    transition: .3s ease all;
+    transform: scale(0.7);
+    opacity: 0;
+    margin:10px;
+  }
+  
+  .popup h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    opacity: 0;
+    padding-top:-20px;
+  }
+  
+  .popup p {
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    opacity: 0;
+    margin:10px;
+    text-align: start;
+  }
+  
+
+
+
 }
 
 @media screen and (min-width: 375px) {
@@ -166,7 +343,38 @@ footer{
       .pp {
         color:#333;
         font-size: 1.3rem;       
-    }
+      }
+      .popup {
+        background: #F8F8F8;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+        border-radius: 3px;
+        font-family: 'Montserrat', sans-serif;
+        padding: 8px;
+        text-align: center;
+        width: 90vw;
+        height:90vh;
+        transition: .3s ease all;
+        transform: scale(0.7);
+        opacity: 0;
+        margin:10px;
+      }
+      
+      .popup h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        opacity: 0;
+        padding-top:-20px;
+      }
+      
+      .popup p {
+        font-size: 1.4rem;
+        font-weight: 300;
+        margin-bottom: 20px;
+        opacity: 0;
+        margin:10px;
+        text-align: start;
+      }
 
 }
 @media screen and (min-width: 768px) {
@@ -178,50 +386,110 @@ footer{
       .pp {
         color:#333;
         font-size: 1.8rem;       
-    }
-    .main-map {
+      }
+      .main-map {
         width:20vw;
-    }
-    .box h2{
+      }
+      .box h2{
         font-size: 1.4rem;
         font-weight: 600;
         text-transform: uppercase;
         color: #d9d9d9;
         
       }
-
-}
-@media screen and (min-width: 768px) {
-    .content1 .text{
-        font-size: 3rem;
-        font-weight: 600;
-        color: #202020;
+      .popup {
+        background: #F8F8F8;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+        border-radius: 3px;
+        font-family: 'Montserrat', sans-serif;
+        padding: 8px;
+        text-align: center;
+        width: 90vw;
+        height:90vh;
+        transition: .3s ease all;
+        transform: scale(0.7);
+        opacity: 0;
+        margin:50px;
       }
-      .pp {
-        color:#333;
-        font-size: 2.1rem;       
-    }
-      .main-map {
-        width:20vw;
-    }
-    .departamento {
-        font-size:2rem;
-    }
-    .provincia {
-        font-size:2rem;
-    }
-    .buscar button {
-        height: 30px;
-        width: 20%;
-        border: none;
-        outline: none;
-        background: #f12020;
-        font-size: 1.8rem;
+      .popup h3 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        opacity: 0;
+      }
+      
+      .popup p {
+        font-size: 1.4rem;
         font-weight: 300;
-        cursor: pointer;
-        transition: .3s;
-        color: #d9d9d9;
-        margin:20px;
-    }
+        margin-bottom: 20px;
+        opacity: 0;
+        margin:10px;
+        text-align: start;
+      }
 
 }
+
+@media screen and (min-width: 1440px) {
+  .content1 .text{
+      font-size: 3.2rem;
+      font-weight: 600;
+      color: #202020;
+    }
+    .pp {
+      color:#333;
+      font-size: 2.1rem;       
+  }
+    .main-map {
+      width:20vw;
+  }
+  .departamento {
+      font-size:2rem;
+  }
+  .provincia {
+      font-size:2rem;
+  }
+  .buscar button {
+      height: 30px;
+      width: 20%;
+      border: none;
+      outline: none;
+      background: #f12020;
+      font-size: 1.8rem;
+      font-weight: 300;
+      cursor: pointer;
+      transition: .3s;
+      color: #d9d9d9;
+      margin:20px;
+  }
+  .popup {
+    background: #F8F8F8;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px;
+    text-align: center;
+    width: 70vw;
+    height:90vh;
+    transition: .3s ease all;
+    transform: scale(0.7);
+    opacity: 0;
+    margin:50px;
+  }
+  .popup h3 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-top: -10px;
+    opacity: 0;
+  }
+  
+  .popup p {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    opacity: 0;
+    margin:10px;
+    text-align: start;
+  }
+
+}
+
